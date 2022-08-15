@@ -1,0 +1,25 @@
+import java.util.PriorityQueue;
+import java.util.Scanner;
+
+public class Main{
+    public static void main(String args[]){
+        Scanner sc = new Scanner(System.in);
+        int cnt = sc.nextInt();
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        StringBuilder sb = new StringBuilder();
+
+        for(int i=0;i<cnt;i++){
+            int value = sc.nextInt();
+            if(value == 0){
+                if(pq.isEmpty()) sb.append(0);
+                else sb.append(pq.poll());
+                if(i != cnt-1) sb.append('\n');
+            }else{
+                pq.add(value);
+            }
+            
+        }
+
+        System.out.println(sb);
+    }
+}

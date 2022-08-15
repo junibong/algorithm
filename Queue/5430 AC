@@ -1,0 +1,57 @@
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.Scanner;
+
+public class Main{
+    public static void main(String args[]){
+        Scanner sc = new Scanner(System.in);
+        int cnt = sc.nextInt();
+
+        for(int i=0;i<cnt;i++){
+            String command = sc.next();
+            int n = sc.nextInt();
+            String arr = sc.next();
+            Deque<Integer> deque = new LinkedList<>();
+            for(String s:arr.substring(1,arr.length()-1).split(",")){
+                if(!s.equals("")){
+                    deque.add(Integer.valueOf(s));
+                }
+            }
+
+            System.out.println(cal(deque,command));
+        }
+    }
+
+    public static String cal(Deque<Integer> deque, String command){
+        boolean reverse = false;
+
+        for(char com : command.toCharArray()){
+            if(com == 'R'){
+                reverse = !reverse;
+            }else{
+                if(deque.size() == 0){
+                    return "error";
+                }
+
+                if(reverse){
+                    deque.removeLast();
+                }else{
+                    deque.removeFirst();
+                }
+            }
+        }
+
+        StringBuilder sb = new StringBuilder();
+        sb.append('[');
+        while(!deque.isEmpty()){
+            sb.append(reverse ? deque.removeLast() : deque.removeFirst());
+            if (deque.size() != 0){
+                sb.append(',');
+            }
+        }
+        sb.append(']');
+
+        return sb.toString();
+    }
+     
+}
